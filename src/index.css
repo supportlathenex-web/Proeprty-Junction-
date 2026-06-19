@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Belleza&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-belleza: "Belleza", sans-serif;
+  --font-sans: "Plus Jakarta Sans", sans-serif;
+  
+  --color-brand-bg: #F1FAFA;
+  --color-brand-black: #141111;
+  --color-brand-white: #FFFFFF;
+  --color-brand-navy: #0E2F56;
+  --color-brand-red: #E3262A;
+}
+
+/* Global Reset & Typography */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-belleza);
+  background-color: var(--color-brand-bg);
+  color: var(--color-brand-black);
+  overflow-x: hidden;
+}
+
+/* Custom styles for luxury platform feel */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(14, 47, 86, 0.08);
+}
+
+.luxury-glow {
+  box-shadow: 0 10px 40px -10px rgba(14, 47, 86, 0.08);
+}
+
+.title-tight {
+  letter-spacing: -0.02em;
+}
+
+/* Scrollbar layout */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #F1FAFA;
+}
+::-webkit-scrollbar-thumb {
+  background: #0E2F56;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #E3262A;
+}
