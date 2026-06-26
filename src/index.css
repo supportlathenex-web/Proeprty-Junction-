@@ -1,56 +1,74 @@
-@import url('https://fonts.googleapis.com/css2?family=Belleza&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --font-belleza: "Belleza", sans-serif;
-  --font-sans: "Plus Jakarta Sans", sans-serif;
+  --font-sans: "Plus Jakarta Sans", "Inter", -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", "SF Mono", monospace;
   
-  --color-brand-bg: #F1FAFA;
-  --color-brand-black: #141111;
+  --color-brand-bg: #FAF9F6; /* Luxury warm cream-white */
+  --color-brand-black: #121214; /* Luxury deep absolute charcoal */
   --color-brand-white: #FFFFFF;
-  --color-brand-navy: #0E2F56;
-  --color-brand-red: #E3262A;
+  --color-brand-accent: #0066CC; /* Tech-focused solid blue */
+  --color-brand-bronze: #8E8675; /* Elegant metal tone */
+  --color-brand-gray-light: #F5F5F7;
 }
 
 /* Global Reset & Typography */
 html {
   scroll-behavior: smooth;
+  font-family: var(--font-sans);
 }
 
 body {
-  font-family: var(--font-belleza);
   background-color: var(--color-brand-bg);
   color: var(--color-brand-black);
   overflow-x: hidden;
 }
 
-/* Custom styles for luxury platform feel */
-.glass-panel {
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(14, 47, 86, 0.08);
+/* Custom premium visual elements */
+.apple-card {
+  background: var(--color-brand-white);
+  border: 1px solid rgba(18, 18, 20, 0.05);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.02);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.luxury-glow {
-  box-shadow: 0 10px 40px -10px rgba(14, 47, 86, 0.08);
+.apple-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.05);
+  border-color: rgba(18, 18, 20, 0.08);
 }
 
-.title-tight {
-  letter-spacing: -0.02em;
+.glass-header {
+  background: rgba(250, 249, 246, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
 }
 
-/* Scrollbar layout */
-::-webkit-scrollbar {
-  width: 6px;
+/* Custom horizontal scrollbar for product spec sheet sliders */
+.spec-scrollbar::-webkit-scrollbar {
+  height: 4px;
 }
-::-webkit-scrollbar-track {
-  background: #F1FAFA;
+.spec-scrollbar::-webkit-scrollbar-track {
+  background: rgba(18, 18, 20, 0.02);
 }
-::-webkit-scrollbar-thumb {
-  background: #0E2F56;
+.spec-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(18, 18, 20, 0.15);
   border-radius: 9999px;
 }
-::-webkit-scrollbar-thumb:hover {
-  background: #E3262A;
+
+/* Slide in animation */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-up {
+  animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }

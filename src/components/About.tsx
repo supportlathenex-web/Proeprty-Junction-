@@ -1,149 +1,114 @@
 import React from 'react';
-import { ShieldCheck, Clock, Award, Landmark, MapPin, BadgeDollarSign, HeartHandshake } from 'lucide-react';
-import { getWebContent } from '../contentData';
+import { ShieldCheck, MapPin, Sparkles, Building, Briefcase, Award } from 'lucide-react';
+import { motion } from 'motion/react';
 
-interface AboutProps {
-  onOpenBooking: () => void;
-}
-
-export const About: React.FC<AboutProps> = ({ onOpenBooking }) => {
-  const content = getWebContent();
-  
+export const About: React.FC = () => {
   return (
-    <section id="about-section-id" className="py-20 bg-brand-bg relative overflow-hidden">
-      <div className="absolute top-1/2 left-0 w-72 h-72 bg-brand-navy/5 rounded-full filter blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-brand-red/5 rounded-full filter blur-3xl pointer-events-none" />
+    <div className="space-y-20 max-w-7xl mx-auto px-4 sm:px-6">
+      {/* Editorial Headline */}
+      <section className="text-center md:text-left max-w-3xl space-y-4">
+        <span className="text-[10px] font-mono tracking-widest text-zinc-400 uppercase block">ABOUT PROPERTY JUNCTION</span>
+        <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-zinc-950">
+          Your trusted partner in navigating the real estate market.
+        </h2>
+        <p className="text-zinc-500 text-sm leading-relaxed">
+          At Property Junction, we bring years of expertise in the local real estate brokerage market. We connect buyers and sellers to facilitate seamless, transparent, and rewarding property transactions.
+        </p>
+      </section>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
-        {/* Title Stack */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
-          <div className="max-w-2xl">
-            <span className="text-[11px] font-sans font-bold tracking-[0.25em] text-brand-red uppercase mb-3 block">
-              {content.aboutUpper}
+      {/* Grid of Materials & Systems */}
+      <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* Material 1 */}
+        <div className="bg-white p-6 rounded-2xl border border-zinc-200 shadow-xs flex flex-col justify-between hover:border-zinc-350 transition-all">
+          <div className="space-y-4">
+            <span className="p-3.5 bg-zinc-50 rounded-2xl inline-block text-zinc-950 border border-zinc-200">
+              <Building className="w-5 h-5" />
             </span>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-belleza font-extrabold text-[#0E2F56] tracking-tight leading-none">
-              {content.aboutTitle}
-            </h2>
-          </div>
-          <div className="max-w-md font-sans">
-            <p className="text-xs text-zinc-600 leading-relaxed font-light">
-              {content.aboutText}
+            <h3 className="text-sm font-bold uppercase tracking-widest text-zinc-950">Extensive Network</h3>
+            <p className="text-zinc-500 text-xs leading-relaxed">
+              We leverage an extensive network of builders, property owners, and investors to find the perfect match for our clients, whether you are looking for an apartment, villa, or commercial space.
             </p>
           </div>
         </div>
 
-        {/* Bento Grid Features */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Main Hero Card within Bento */}
-          <div className="md:col-span-2 bg-brand-navy text-white rounded-3xl p-8 md:p-10 flex flex-col justify-between border border-brand-white/10 hover:shadow-xl transition-all duration-300 relative overflow-hidden">
-            <div className="absolute -right-20 -bottom-20 w-80 h-80 bg-brand-red/10 rounded-full filter blur-2xl pointer-events-none" />
-            
-            <div className="flex items-center gap-3 mb-6 bg-brand-white/10 rounded-full px-4 py-2 w-fit">
-              <Award className="w-5 h-5 text-brand-red" />
-              <span className="text-xs font-semibold font-sans tracking-wide">
-                Property Junction Vibe
-              </span>
-            </div>
-
-            <div>
-              <h3 className="text-2xl sm:text-3xl font-belleza font-extrabold text-brand-bg tracking-tight mb-4">
-                {content.aboutBentoTitle}
-              </h3>
-              <p className="text-xs text-zinc-300 leading-relaxed mb-6 font-sans">
-                {content.aboutBentoText}
-              </p>
-              
-              <div className="flex flex-wrap items-center gap-6 text-xs text-brand-bg/85 font-mono">
-                <div className="flex items-center gap-2">
-                  <ShieldCheck className="w-4 h-4 text-brand-red" />
-                  <span>Licensed Agency Network</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Clock className="w-4 h-4 text-brand-red" />
-                  <span>Open 24/7 Consultation</span>
-                </div>
-              </div>
-            </div>
+        {/* Material 2 */}
+        <div className="bg-white p-6 rounded-2xl border border-zinc-200 shadow-xs flex flex-col justify-between hover:border-zinc-350 transition-all">
+          <div className="space-y-4">
+            <span className="p-3.5 bg-zinc-50 rounded-2xl inline-block text-zinc-950 border border-zinc-200">
+              <Briefcase className="w-5 h-5" />
+            </span>
+            <h3 className="text-sm font-bold uppercase tracking-widest text-zinc-950">Expert Negotiation</h3>
+            <p className="text-zinc-500 text-xs leading-relaxed">
+              Our seasoned agents negotiate rigorously on your behalf, ensuring you get the best possible valuation, clear terms, and a secure legal framework for your property transaction.
+            </p>
           </div>
+        </div>
 
-          {/* Quick Metrics Card */}
-          <div className="bg-white rounded-3xl p-8 border border-brand-navy/10 flex flex-col justify-between hover:shadow-xl transition-all duration-300">
-            <div>
-              <span className="text-zinc-500 font-sans text-xs uppercase tracking-widest block mb-1">
-                OPERATIONAL BASE
+        {/* Material 3 */}
+        <div className="bg-white p-6 rounded-2xl border border-zinc-200 shadow-xs flex flex-col justify-between hover:border-zinc-350 transition-all">
+          <div className="space-y-4">
+            <span className="p-3.5 bg-zinc-50 rounded-2xl inline-block text-zinc-950 border border-zinc-200">
+              <ShieldCheck className="w-5 h-5" />
+            </span>
+            <h3 className="text-sm font-bold uppercase tracking-widest text-zinc-950">Trusted Transparency</h3>
+            <p className="text-zinc-500 text-xs leading-relaxed">
+              We believe in 100% transparency. From property title verifications to comprehensive paperwork handling, we stand by your side until the deed is done safely.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Geographic Hubs Section */}
+      <section className="bg-zinc-50 p-8 sm:p-12 rounded-3xl border border-zinc-200 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div className="space-y-6">
+          <span className="text-[10px] font-mono tracking-widest text-zinc-450 uppercase block">GEOGRAPHIC REACH</span>
+          <h3 className="text-2xl font-extrabold tracking-tight text-zinc-950">
+            Connecting Thane, Shilphata, and Mumbai.
+          </h3>
+          <p className="text-zinc-500 text-xs leading-relaxed">
+            Our brokerage operations are strategically located to cover major real estate hubs. From the premium avenues of Thane West to the rapidly growing connectivity hubs of Shilphata, we have our ear to the ground.
+          </p>
+
+          <div className="space-y-4">
+            <div className="flex gap-4 items-start">
+              <span className="p-2 bg-white rounded-xl border border-zinc-200 text-zinc-900 shrink-0">
+                <MapPin className="w-4 h-4" />
               </span>
-              <h4 className="text-xl font-belleza font-extrabold text-brand-navy tracking-tight mb-4 flex items-start gap-2">
-                <MapPin className="w-5 h-5 text-brand-red shrink-0 mt-0.5" />
-                Shop no. 1, M M City, Shilphata
-              </h4>
-              <p className="text-xs text-zinc-600 leading-relaxed font-sans font-light">
-                Our modern commercial office is strategically located in Shilphata, Mumbra, serving as the central highway junction connecting Thane West, Kharghar, and greater Navi Mumbai.
-              </p>
-            </div>
-
-            <div className="mt-6 pt-6 border-t border-zinc-100 flex items-center justify-between">
               <div>
-                <span className="text-[10px] text-zinc-400 font-sans block">Availability Status</span>
-                <span className="text-xs font-bold text-emerald-600 flex items-center gap-1.5 font-sans mt-0.5">
-                  <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
-                  ONLINE &amp; ACTIVE NOW
-                </span>
+                <h4 className="text-xs font-bold text-zinc-950">Pokhran Road Corridor (Thane West)</h4>
+                <p className="text-[11px] text-zinc-500">Premium residential locations with excellent connectivity to major highways.</p>
               </div>
-              <button
-                onClick={onOpenBooking}
-                className="text-xs font-serif font-bold text-brand-navy hover:text-brand-red transition-colors cursor-pointer"
-              >
-                VISIT THE OFFICE →
-              </button>
             </div>
-          </div>
-
-          {/* Financial Incentive Card 1: 0% Brokerage */}
-          <div className="bg-white rounded-3xl p-8 border border-brand-navy/10 flex flex-col gap-6 hover:shadow-xl transition-all duration-300">
-            <div className="w-12 h-12 bg-zinc-50 rounded-2xl flex items-center justify-center border border-brand-navy/10 shadow-sm">
-              <BadgeDollarSign className="w-6 h-6 text-brand-red" />
-            </div>
-            <div>
-              <h4 className="text-lg font-belleza font-extrabold text-[#0E2F56] tracking-tight">
-                0% Brokerage Policy
-              </h4>
-              <p className="text-xs text-zinc-600 mt-2 leading-relaxed font-sans font-light">
-                We believe premium advice shouldn't be penalized. Our physical agency model imposes zero fee percentage requirements on fresh primary developer transactions, saving you significant transaction costs.
-              </p>
-            </div>
-          </div>
-
-          {/* Financial Incentive Card 2: 20:80 Payment Strategy */}
-          <div className="bg-white rounded-3xl p-8 border border-brand-navy/10 flex flex-col gap-6 hover:shadow-xl transition-all duration-300">
-            <div className="w-12 h-12 bg-zinc-50 rounded-2xl flex items-center justify-center border border-brand-navy/10 shadow-sm">
-              <Landmark className="w-6 h-6 text-brand-red" />
-            </div>
-            <div>
-              <h4 className="text-lg font-belleza font-extrabold text-[#0E2F56] tracking-tight">
-                20:80 Payment Structures
-              </h4>
-              <p className="text-xs text-zinc-600 mt-2 leading-relaxed font-sans font-light">
-                Preserve working capital safely. We partner with vetted high-tier builders to arrange flexible 20:80 schemes where you allocate only 20% upfront and the remainder upon physical handover of your key assets.
-              </p>
-            </div>
-          </div>
-
-          {/* Customer Care Vibe */}
-          <div className="bg-white rounded-3xl p-8 border border-brand-navy/10 flex flex-col gap-6 hover:shadow-xl transition-all duration-300">
-            <div className="w-12 h-12 bg-zinc-50 rounded-2xl flex items-center justify-center border border-brand-navy/10 shadow-sm">
-              <HeartHandshake className="w-6 h-6 text-brand-red" />
-            </div>
-            <div>
-              <h4 className="text-lg font-belleza font-extrabold text-[#0E2F56] tracking-tight">
-                Complete Site-Transit Assistance
-              </h4>
-              <p className="text-xs text-zinc-600 mt-2 leading-relaxed font-sans font-light">
-                No stress, absolute comfort. We arrange secure transport from your doorstep, coordinate private previews with developer representatives, and explain surrounding social structures (schools, hospitals, road connections) directly.
-              </p>
+            <div className="flex gap-4 items-start">
+              <span className="p-2 bg-white rounded-xl border border-zinc-200 text-zinc-900 shrink-0">
+                <MapPin className="w-4 h-4" />
+              </span>
+              <div>
+                <h4 className="text-xs font-bold text-zinc-950">Kalyan-Shil Phata</h4>
+                <p className="text-[11px] text-zinc-500">Upcoming investment hubs overlooking rapid infrastructure expansion.</p>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+
+        {/* Visual Showcase */}
+        <div className="relative rounded-2xl overflow-hidden aspect-video shadow-2xl border border-zinc-200 bg-zinc-900 group">
+          <img
+            src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80"
+            alt="Property Junction"
+            className="w-full h-full object-cover grayscale opacity-80 group-hover:scale-105 transition-transform duration-700"
+            referrerPolicy="no-referrer"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/80 via-zinc-950/20 to-transparent p-6 flex flex-col justify-end">
+            <div className="flex items-center gap-2 text-white">
+              <Sparkles className="w-4 h-4 text-amber-400" />
+              <p className="font-mono text-[10px] tracking-widest uppercase">Expertise & Trust</p>
+            </div>
+            <p className="text-white/80 text-[11px] mt-1">Guiding you to the right investment.</p>
+          </div>
+        </div>
+      </section>
+    </div>
   );
 };
+

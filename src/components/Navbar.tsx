@@ -1,28 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import { Logo } from './Logo';
-import { Menu, X, Phone, ShieldCheck } from 'lucide-react';
+import { ShoppingBag, Search, ClipboardList, Database, LayoutGrid, Menu, X } from 'lucide-react';
 
 interface NavbarProps {
-  onOpenBooking: () => void;
-  onNavigateToPrivacy: () => void;
-  onNavigateToHome: () => void;
-  onNavigateToProperties: () => void;
-  currentView: 'home' | 'properties' | 'property-detail' | 'privacy';
+  onOpenCart: () => void;
+  cartCount: number;
+  currentTab: 'catalog' | 'ledger' | 'applications';
+  onChangeTab: (tab: 'catalog' | 'ledger' | 'applications') => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
-  onOpenBooking,
-  onNavigateToPrivacy,
-  onNavigateToHome,
-  onNavigateToProperties,
-  currentView,
+  onOpenCart,
+  cartCount,
+  currentTab,
+  onChangeTab,
 }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 30) {
+      if (window.scrollY > 20) {
         setIsScrolled(true);
       } else {
         setIsScrolled(false);
@@ -32,176 +30,119 @@ export const Navbar: React.FC<NavbarProps> = ({
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleLinkClick = (selectorId: string) => {
+  const handleTabSelect = (tab: 'catalog' | 'ledger' | 'applications') => {
+    onChangeTab(tab);
     setIsMobileMenuOpen(false);
-    onNavigateToHome();
-    
-    setTimeout(() => {
-      const element = document.getElementById(selectorId);
-      if (element) {
-        const offset = 90;
-        const bodyRect = document.body.getBoundingClientRect().top;
-        const elementRect = element.getBoundingClientRect().top;
-        const elementPosition = elementRect - bodyRect;
-        const offsetPosition = elementPosition - offset;
-
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: 'smooth',
-        });
-      }
-    }, 100);
+    // Smooth scroll back to top to transition tabs cleanly
+    window.scrollTo({ top: 0, behavior: 'instant' });
   };
 
   return (
     <header
       className={`fixed top-0 left-0 w-full z-40 transition-all duration-300 ${
-        isScrolled || currentView !== 'home'
-          ? 'bg-brand-bg/90 backdrop-blur-md py-3 shadow-md border-b border-brand-navy/5'
+        isScrolled
+          ? 'glass-header py-3.5 shadow-sm border-b border-zinc-200/50'
           : 'bg-transparent py-5'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between">
-        {/* Brand Logo/Signature */}
-        <div onClick={onNavigateToHome} className="cursor-pointer">
-          <Logo className="h-10 sm:h-12" />
+        {/* Logo Wordmark */}
+        <div onClick={() => handleTabSelect('catalog')} className="cursor-pointer">
+          <Logo className="h-9 sm:h-10" />
         </div>
 
-        {/* Desktop Navigation Links */}
-        <nav className="hidden md:flex items-center gap-8 font-belleza text-sm font-semibold tracking-wide">
+        {/* Dynamic Nav Actions */}
+        <nav className="hidden md:flex items-center gap-1.5 p-1 bg-zinc-200/50 border border-zinc-200/30 rounded-full text-xs font-semibold">
           <button
-            onClick={() => handleLinkClick('about-section-id')}
-            className="text-brand-navy hover:text-brand-red transition-colors duration-200 cursor-pointer"
-            id="nav-link-about"
-          >
-            About Hub
-          </button>
-          <button
-            onClick={() => handleLinkClick('services-section-id')}
-            className="text-brand-navy hover:text-brand-red transition-colors duration-200 cursor-pointer"
-            id="nav-link-services"
-          >
-            Signature Services
-          </button>
-          <button
-            onClick={onNavigateToProperties}
-            className={`transition-colors duration-200 cursor-pointer ${
-              currentView === 'properties' ? 'text-brand-red font-bold' : 'text-brand-navy hover:text-brand-red'
+            onClick={() => handleTabSelect('catalog')}
+            className={`px-4 py-1.5 rounded-full transition-all duration-300 flex items-center gap-1.5 ${
+              currentTab === 'catalog'
+                ? 'bg-white text-zinc-950 shadow-xs ring-1 ring-zinc-500/5'
+                : 'text-zinc-600 hover:text-zinc-950 hover:bg-white/40'
             }`}
-            id="nav-link-properties"
           >
-            Exclusive Collection
+            <LayoutGrid className="w-3.5 h-3.5" />
+            Active Catalog
           </button>
           <button
-            onClick={onNavigateToPrivacy}
-            className={`flex items-center gap-1 transition-colors duration-200 cursor-pointer ${
-              currentView === 'privacy'
-                ? 'text-brand-red font-bold'
-                : 'text-brand-navy hover:text-brand-red'
+            onClick={() => handleTabSelect('ledger')}
+            className={`px-4 py-1.5 rounded-full transition-all duration-300 flex items-center gap-1.5 ${
+              currentTab === 'ledger'
+                ? 'bg-white text-zinc-950 shadow-xs ring-1 ring-zinc-500/5'
+                : 'text-zinc-600 hover:text-zinc-950 hover:bg-white/40'
             }`}
-            id="nav-link-privacy"
           >
-            <ShieldCheck className="w-4 h-4" />
-            Privacy Protocol
+            <Database className="w-3.5 h-3.5" />
+            Registry Ledger
+          </button>
+          <button
+            onClick={() => handleTabSelect('applications')}
+            className={`px-4 py-1.5 rounded-full transition-all duration-300 flex items-center gap-1.5 ${
+              currentTab === 'applications'
+                ? 'bg-white text-zinc-950 shadow-xs ring-1 ring-zinc-500/5'
+                : 'text-zinc-600 hover:text-zinc-950 hover:bg-white/40'
+            }`}
+          >
+            <ClipboardList className="w-3.5 h-3.5" />
+            Filing Auditor
           </button>
         </nav>
 
-        {/* Action Button & Hotline */}
-        <div className="hidden md:flex items-center gap-4">
-          <a
-            href="tel:+918668644479"
-            className="flex items-center gap-1.5 text-xs text-brand-navy font-bold font-sans hover:text-brand-red transition-colors"
-          >
-            <Phone className="w-3.5 h-3.5 text-brand-red animate-pulse" />
-            +91 86686 44479
-          </a>
+        {/* Cart Trigger */}
+        <div className="flex items-center gap-3">
           <button
-            onClick={onOpenBooking}
-            className="bg-brand-red hover:bg-brand-navy text-white text-xs font-serif font-bold tracking-wider px-5 py-2.5 rounded-lg transition-all duration-300 cursor-pointer shadow-md shadow-brand-red/10 hover:shadow-brand-navy/10"
-            id="nav-cta-book-visit"
+            onClick={onOpenCart}
+            className="flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 bg-zinc-950 hover:bg-zinc-850 text-white rounded-full text-xs font-semibold tracking-wide transition-all shadow-sm shadow-zinc-950/10 cursor-pointer group"
           >
-            Book Site Visit
+            <ShoppingBag className="w-3.5 h-3.5 group-hover:scale-110 transition-transform" />
+            <span className="hidden sm:inline">Secured Bag</span>
+            {cartCount > 0 && (
+              <span className="ml-1 w-5 h-5 rounded-full bg-blue-500 text-white text-[10px] font-mono flex items-center justify-center font-bold animate-pulse">
+                {cartCount}
+              </span>
+            )}
           </button>
-        </div>
 
-        {/* Mobile Hamburger toggle */}
-        <div className="flex items-center gap-3 md:hidden">
-          <a
-            href="tel:+918668644479"
-            className="text-brand-navy hover:text-brand-red p-2"
-          >
-            <Phone className="w-4 h-4 text-brand-red" />
-          </a>
+          {/* Mobile Menu Toggle Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="text-brand-navy focus:outline-none p-2"
-            id="mobile-menu-burger-toggle"
+            className="md:hidden p-2 text-zinc-700 hover:text-zinc-950 bg-zinc-100 rounded-full hover:bg-zinc-200 transition-colors"
           >
-            {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {isMobileMenuOpen ? <X className="w-4.5 h-4.5" /> : <Menu className="w-4.5 h-4.5" />}
           </button>
         </div>
       </div>
 
       {/* Mobile Menu Panel */}
       {isMobileMenuOpen && (
-        <div className="md:hidden bg-brand-bg/95 backdrop-blur-lg border-b border-brand-navy/10 flex flex-col px-6 py-6 absolute top-full left-0 w-full shadow-xl z-30 font-belleza gap-4">
+        <div className="md:hidden bg-zinc-50/95 backdrop-blur-xl border-b border-zinc-200 absolute top-full left-0 w-full px-6 py-4 shadow-xl z-30 flex flex-col gap-2.5 font-sans">
           <button
-            onClick={() => handleLinkClick('about-section-id')}
-            className="text-left text-brand-navy text-base py-2 border-b border-brand-navy/5 font-semibold"
-            id="mobile-nav-about"
+            onClick={() => handleTabSelect('catalog')}
+            className={`w-full text-left py-3 px-4 rounded-lg text-xs font-bold flex items-center gap-2 ${
+              currentTab === 'catalog' ? 'bg-zinc-950 text-white' : 'bg-white text-zinc-800 border border-zinc-200'
+            }`}
           >
-            About Hub
+            <LayoutGrid className="w-4 h-4" />
+            Active Catalog
           </button>
           <button
-            onClick={() => handleLinkClick('services-section-id')}
-            className="text-left text-brand-navy text-base py-2 border-b border-brand-navy/5 font-semibold"
-            id="mobile-nav-services"
+            onClick={() => handleTabSelect('ledger')}
+            className={`w-full text-left py-3 px-4 rounded-lg text-xs font-bold flex items-center gap-2 ${
+              currentTab === 'ledger' ? 'bg-zinc-950 text-white' : 'bg-white text-zinc-800 border border-zinc-200'
+            }`}
           >
-            Signature Services
+            <Database className="w-4 h-4" />
+            Registry Ledger
           </button>
           <button
-            onClick={() => {
-              setIsMobileMenuOpen(false);
-              onNavigateToProperties();
-            }}
-            className="text-left text-brand-navy text-base py-2 border-b border-brand-navy/5 font-semibold"
-            id="mobile-nav-properties"
+            onClick={() => handleTabSelect('applications')}
+            className={`w-full text-left py-3 px-4 rounded-lg text-xs font-bold flex items-center gap-2 ${
+              currentTab === 'applications' ? 'bg-zinc-950 text-white' : 'bg-white text-zinc-800 border border-zinc-200'
+            }`}
           >
-            Exclusive Collection
+            <ClipboardList className="w-4 h-4" />
+            Filing Auditor
           </button>
-          <button
-            onClick={() => {
-              setIsMobileMenuOpen(false);
-              onNavigateToPrivacy();
-            }}
-            className="text-left text-brand-navy text-base py-2 border-b border-brand-navy/5 font-semibold flex items-center justify-between"
-            id="mobile-nav-privacy"
-          >
-            <span>Privacy Protocol</span>
-            <ShieldCheck className="w-4 h-4 text-brand-red" />
-          </button>
-
-          <div className="flex flex-col gap-3 mt-4 pt-2">
-            <span className="text-[10px] text-zinc-400 font-sans uppercase tracking-widest text-center">
-              Available 24 Hours. Shilphata, Thane
-            </span>
-            <a
-              href="tel:+918668644479"
-              className="w-full text-center py-2.5 bg-brand-navy text-white rounded-lg text-xs font-semibold font-sans tracking-wide"
-            >
-              Hotline: +91 86686 44479
-            </a>
-            <button
-              onClick={() => {
-                setIsMobileMenuOpen(false);
-                onOpenBooking();
-              }}
-              className="w-full text-center py-3 bg-brand-red text-white rounded-lg text-xs font-bold tracking-wide shadow-md shadow-brand-red/10"
-              id="mobile-nav-book-cta"
-            >
-              BOOK SITE VISIT
-            </button>
-          </div>
         </div>
       )}
     </header>

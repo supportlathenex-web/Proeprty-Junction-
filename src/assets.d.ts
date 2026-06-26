@@ -1,12 +1,12 @@
 declare module "*.jpg" {
-  const value: string;
-  return value;
+  const src: string;
+  export default src;
 }
 declare module "*.png" {
-  const value: string;
-  return value;
+  const src: string;
+  export default src;
 }
 declare module "*.svg" {
-  const value: string;
-  return value;
+  const src: string;
+  export default src;
 }

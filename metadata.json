@@ -1,6 +1,6 @@
 {
   "name": "Property Junction",
-  "description": "Ultra-premium real estate platform discovery and site visit booking ecosystem for Thane, Shilphata, and Navi Mumbai.",
+  "description": "An Apple-level professional boutique luxury real estate platform. Discover, explore, and secure high-end residences with fluid spatial design and custom physical-digital credentials.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }
